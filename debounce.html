@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="input" />
+  <button id="button">cancel</button>
+  <script src="./debounce.js"></script>
+  <script>
+    let count = 0
+    function foo(event) {
+      console.log(count++, this, event);
+      return 'have return'
+    }
+    const input = document.getElementById('input')
+
+
+    // input.oninput = debounce(foo, 1000)
+
+    // input.oninput = debounce(foo, 1000, true)
+
+    // const onFn = debounce(foo, 1000)
+    // input.oninput = onFn
+    // const button = document.getElementById('button')
+    // button.onclick = () => {
+    //   onFn.cancel()
+    // }
+
+    // input.oninput = debounce(foo, 1000, false, (res) => {
+    //   console.log(res);
+    // })
+
+    const onFn = debounce(foo, 1000)
+    function getReturnByPromise(...arg) {
+      onFn.apply(input, arg).then(res => {
+        console.log(res);
+      })
+    }
+    input.oninput = getReturnByPromise
+
+  </script>
+</body>
+
+</html>

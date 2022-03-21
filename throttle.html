@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="input" />
+  <button id="button">cancel</button>
+  <script src="./throttle.js"></script>
+  <script>
+    let count = 0
+    function foo(event) {
+      console.log(count++, this, event);
+      return 'have return'
+    }
+    const input = document.getElementById('input')
+    const button = document.getElementById('button')
+
+    // input.oninput = throttle(foo, 1000)
+
+    // input.oninput = throttle(foo, 1000, { leading: false })
+
+    // const execfn = throttle(foo, 1000, { leading: true, trailing: true })
+    // input.oninput = execfn
+    // button.onclick = execfn.cancel()
+
+    // input.oninput = throttle(foo, 1000, { resultCallback: res => { console.log(res); } })
+
+    const execfn = throttle(foo, 1000)
+    const getReturnByPromise = (...arg) => {
+      execfn.apply(input, arg).then(res => { console.log(res); })
+    }
+    input.oninput = getReturnByPromise
+  </script>
+</body>
+
+</html>

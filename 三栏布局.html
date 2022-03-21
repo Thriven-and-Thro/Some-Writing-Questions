@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  .wrap {
+    margin-bottom: 100px;
+  }
+
+  .left {
+    width: 100px;
+    height: 100px;
+    background-color: #D44B3E;
+  }
+
+  .right {
+    width: 100px;
+    height: 100px;
+    background-color: #98C379;
+  }
+
+  .center {
+    height: 100px;
+    background-color: #D19860;
+  }
+</style>
+
+<body>
+
+  <!-- float -->
+  <div class="three1 wrap">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="center"></div>
+  </div>
+  <style>
+    .three1 .left {
+      float: left;
+    }
+
+    .three1 .right {
+      float: right;
+    }
+
+    .three1 .center {
+      margin: 0 100px;
+    }
+  </style>
+
+  <!-- absoult -->
+  <div class="three2 wrap">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="center"></div>
+  </div>
+  <style>
+    .three2 {
+      height: 100px;
+    }
+
+    .three2 .left {
+      position: absolute;
+      left: 0;
+    }
+
+    .three2 .right {
+      position: absolute;
+      right: 0;
+    }
+
+    .three2 .center {
+      position: absolute;
+      left: 100px;
+      right: 100px;
+    }
+  </style>
+
+  <!-- flex -->
+  <div class="three3 wrap">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div>
+  <style>
+    .three3 {
+      display: flex;
+    }
+
+    .three3 .left {}
+
+    .three3 .right {}
+
+    .three3 .center {
+      flex: 1;
+    }
+  </style>
+
+  <!-- table -->
+  <div class="three4 wrap">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div>
+  <style>
+    .three4 {
+      display: table;
+      width: 100%;
+    }
+
+    .three4 .left {
+      display: table-cell;
+    }
+
+    .three4 .right {
+      display: table-cell;
+    }
+
+    .three4 .center {
+      display: table-cell;
+    }
+  </style>
+
+  <!-- grid -->
+  <div class="three5 wrap">
+    <div class="left"></div>
+    <div class="center"></div>
+    <div class="right"></div>
+  </div>
+  <style>
+    .three5 {
+      display: grid;
+      grid-template-columns: 100px auto 100px;
+      grid-template-rows: auto;
+    }
+
+    .three5 .left {}
+
+    .three5 .right {}
+
+    .three5 .center {}
+  </style>
+</body>
+
+</html>
