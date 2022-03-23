@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="img-area">
+      <img class="my-photo" alt="loading" src="./img/default.webp" data-src="./img/wallhaven-k7v9yq.png">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" src="./img/default.webp" data-src="./img/wallhaven-v9v3r5.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" src="./img/default.webp" data-src="./img/wallhaven-wqve97.png">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" src="./img/default.webp" data-src="./img/wallhaven-v9v3r5.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" src="./img/default.webp" data-src="./img/wallhaven-wqve97.png">
+    </div>
+  </div>
+
+  <script>
+    // 方式一：通过计算 盒子位置 < 视口位置 + 滚动位置
+    function lazyLoad1() {
+      const imgs = document.getElementsByTagName('img')
+      const viewHeight = document.documentElement.clientHeight
+      const scrollHeight = document.documentElement.scrollTop || document.body.scrollTop
+
+      for (let i = 0; i < imgs.length; i++) {
+        const offsetHeight = imgs[i].offsetTop
+        if (offsetHeight < viewHeight + scrollHeight) imgs[i].src = imgs[i].dataset.src
+      }
+    }
+    // window.addEventListener('load', lazyLoad1)
+    // window.addEventListener('scroll', lazyLoad1)
+
+    // 方式二：通过计算 元素离视口 < 视口高度
+    function lazyLoad2() {
+      const imgs = document.getElementsByTagName('img')
+      const clientHeight = document.documentElement.clientHeight
+
+      for (let i = 0; i < imgs.length; i++) {
+        if (imgs[i].getBoundingClientRect().top <= clientHeight) {
+          imgs[i].src = imgs[i].dataset.src
+        }
+      }
+    }
+    // window.addEventListener('load', lazyLoad2)
+    // window.addEventListener('scroll', lazyLoad2)
+
+    // 方式三：使用元素监听器 IntersectionObserver
+    function lazyLoad3() {
+      const io = new IntersectionObserver(ioes => {
+        ioes.forEach(ioe => {
+          const el = ioe.target
+          const intersctionRatio = ioe.intersctionRatio
+          if (intersctionRatio > 0 && intersctionRatio <= 1) {
+            el.src = el.dataset.src
+          }
+          el.onload = el.onerror = () => io.unobserve(el)
+        })
+      })
+
+      const imgs = document.getElementsByTagName('img')
+      Array.from(imgs).forEach(img => io.observe(img))
+    }
+    window.addEventListener('load', lazyLoad3)
+  </script>
+</body>
+
+</html>

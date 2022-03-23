@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text">
+  <button>cancel</button>
+  <script>
+    function debounce(fn, delay, options = { immediate: false }) {
+      let timer = null;
+      const { immediate } = options
+      let isInvoke = true
+
+      function _debounce(...arg) {
+        return new Promise((resolve, reject) => {
+          if (timer) clearTimeout(timer);
+          if (immediate && isInvoke) {
+            const result = fn.apply(this, arg)
+            resolve(result)
+            isInvoke = false
+          }
+          timer = setTimeout(() => {
+            const result = fn.apply(this, arg);
+            resolve(result)
+            isInvoke = true
+            timer = null
+          }, delay);
+        })
+      }
+
+      _debounce.cancel = function () {
+        if (timer) clearTimeout(timer)
+        timer = null
+        isInvoke = true
+      }
+
+      return _debounce;
+    }
+
+    const d1 = debounce((a) => {
+      console.log('111', a);
+    }, 1000)
+    const d2 = () => {
+      d1(10).then(res => {
+        console.log('222');
+      })
+    }
+    document.querySelector('input').oninput = d2
+    document.querySelector('button').onclick = d1.cancel
+
+  </script>
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+// 发布订阅者模式
 class CfEventBus {
   constructor() {
     this.eventBus = {};

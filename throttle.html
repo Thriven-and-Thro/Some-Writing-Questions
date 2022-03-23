@@ -15,7 +15,7 @@
   <script>
     let count = 0
     function foo(event) {
-      console.log(count++, this, event);
+      console.log(event.target.value, this, event);
       return 'have return'
     }
     const input = document.getElementById('input')
@@ -31,7 +31,7 @@
 
     // input.oninput = throttle(foo, 1000, { resultCallback: res => { console.log(res); } })
 
-    const execfn = throttle(foo, 1000)
+    const execfn = throttle(foo, 1000, { leading: false })
     const getReturnByPromise = (...arg) => {
       execfn.apply(input, arg).then(res => { console.log(res); })
     }
