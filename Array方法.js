@@ -108,3 +108,26 @@ Array.prototype.cfReduce = function (callback, init) {
 };
 // test
 console.log([-1, 2, 1, 2].cfReduce((pre, cur) => pre + cur, 1));
+
+// Array.prototype.some
+console.log("---------Array.prototype.some----------");
+Array.prototype.cfSome = function (callback, thisArg) {
+  if (typeof callback !== "function") {
+    throw new Error("需要传入回调函数");
+  }
+
+  const arr = Object(this);
+  const len = arr.length | 0;
+  for (let i = 0; i < len; i++) {
+    if (i in arr) {
+      if (callback.call(thisArg, arr[i], i, arr)) return true;
+    }
+  }
+  return false;
+};
+// test
+console.log(
+  [1, 2, 1, 2].cfSome((v) => {
+    return v < 0;
+  })
+);

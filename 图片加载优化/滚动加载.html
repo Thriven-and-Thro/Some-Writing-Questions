@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <img class="my-photo" alt="loading" src="./img/wallhaven-k7v9yq.png">
+  </div>
+
+  <script>
+    const imgs = ["./img/wallhaven-pkgkkp.png", "./img/wallhaven-rdwjj7.jpg", "./img/wallhaven-v9v3r5.jpg", "./img/wallhaven-wqve97.png"]
+    let i = 0
+
+    function scrollLoad() {
+      const clientHeight = document.documentElement.clientHeight
+      const scrollTop = document.documentElement.scrollTop
+      const scrollHeight = document.documentElement.scrollHeight
+
+      if (scrollHeight - 100 <= clientHeight + scrollTop && i < imgs.length) {
+        const imgNode = document.createElement('img')
+        imgNode.src = imgs[i]
+        document.querySelector('.container').appendChild(imgNode)
+        i++
+      }
+    }
+
+
+    window.addEventListener('scroll', scrollLoad)
+  </script>
+
+</body>
+
+</html>

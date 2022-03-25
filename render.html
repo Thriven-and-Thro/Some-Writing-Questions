@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function render(vnode, contain) {
+      if (typeof vnode === 'number') {
+        vnode = String(vnode)
+      }
+      if (typeof vnode === 'string') {
+        return contain.appendChild(document.createTextNode(vnode))
+      } else {
+        const dom = document.createElement(vnode.tag)
+        if (vnode.attrs) {
+          for (let i in vnode.attrs) {
+            dom.setAttribute(i, vnode.attrs[i])
+          }
+        }
+        if (vnode.children.length > 0) {
+          for (let item of vnode.children) {
+            render(item, dom)
+          }
+        }
+        return contain.appendChild(dom)
+      }
+    }
+
+    const vnode = {
+      tag: 'div',
+      attrs: {
+        style: 'height:100px'
+      },
+      children: [
+        {
+          tag: 'p',
+          attrs: {},
+          children: ['我是一段文本']
+        },
+        888
+      ]
+    }
+    render(vnode, document.querySelector('body'))
+
+  </script>
+</body>
+
+</html>
