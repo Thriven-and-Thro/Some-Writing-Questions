@@ -3,7 +3,7 @@ function getData(url) {
     const xhr = XMLHttpRequest
       ? new XMLHttpRequest()
       : new ActiveXObject("Mscrosoft.XMLHttp");
-    xhr.open("GET", url, false);
+    xhr.open("GET", url);
     xhr.setRequestHeader("Accept", "application/json");
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;

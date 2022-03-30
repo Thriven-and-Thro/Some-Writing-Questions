@@ -4,7 +4,7 @@ function cfCompose(...arg) {
   if (!arg.length) throw new TypeError("Error input");
 
   return function (...params) {
-    return arg.reduce((pre, cur) => cur.call(this, pre), [...params]);
+    return arg.reduce((pre, cur) => cur.call(this, pre), ...params);
   };
 }
 

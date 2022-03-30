@@ -27,7 +27,7 @@ Object.defineProperty(Object, "cfAssign", {
 
     for (let i = 0; i < arg.length; i++) {
       const newArg = arg[i];
-      if (newArg !== null) {
+      if (newArg !== null && newArg !== undefined) {
         for (let newKey in newArg) {
           if (Object.prototype.hasOwnProperty.call(newArg, newKey)) {
             res[newKey] = newArg[newKey];
