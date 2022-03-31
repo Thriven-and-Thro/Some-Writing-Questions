@@ -28,10 +28,14 @@ console.log([].cfSlice.call(obj));
 console.log("---------Array.prototype.filter----------");
 Array.prototype.cfFliter = function (callback, thisArg) {
   if (typeof callback !== "function") throw new Error("需要传入回调函数");
+  // Object
   const arr = Object(this);
   const res = [];
+  // len
   const len = arr.length | 0;
   for (let i = 0; i < len; i++) {
+    // in
+    // call(thisArg, arr[i], i, this)
     if (i in arr && callback.call(thisArg, arr[i], i, this)) {
       res.push(arr[i]);
     }

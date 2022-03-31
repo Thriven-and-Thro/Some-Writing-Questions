@@ -1,4 +1,5 @@
 function cfNew(obj, ...arg) {
+  if (!obj.prototype) throw new TypeError();
   const newObj = {};
   const res = obj.call(newObj, ...arg);
   Object.setPrototypeOf(newObj, obj.prototype);

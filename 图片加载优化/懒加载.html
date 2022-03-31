@@ -29,6 +29,9 @@
 
   <script>
     // 方式一：通过计算 盒子位置 < 视口位置 + 滚动位置
+    // document.documentElement.clientHeight：视口大小
+    // document.documentElement.scrollTop：滚动过的大小
+    // imgs[i].offsetTop：盒子上边距的位置
     function lazyLoad1() {
       const imgs = document.getElementsByTagName('img')
       const viewHeight = document.documentElement.clientHeight
@@ -43,6 +46,7 @@
     // window.addEventListener('scroll', lazyLoad1)
 
     // 方式二：通过计算 元素离视口 < 视口高度
+    // imgs[i].getBoundingClientRect().top：盒子上边距离视口上边的大小
     function lazyLoad2() {
       const imgs = document.getElementsByTagName('img')
       const clientHeight = document.documentElement.clientHeight
@@ -53,8 +57,8 @@
         }
       }
     }
-    // window.addEventListener('load', lazyLoad2)
-    // window.addEventListener('scroll', lazyLoad2)
+    window.addEventListener('load', lazyLoad2)
+    window.addEventListener('scroll', lazyLoad2)
 
     // 方式三：使用元素监听器 IntersectionObserver
     function lazyLoad3() {
@@ -72,7 +76,7 @@
       const imgs = document.getElementsByTagName('img')
       Array.from(imgs).forEach(img => io.observe(img))
     }
-    window.addEventListener('load', lazyLoad3)
+    // window.addEventListener('load', lazyLoad3)
   </script>
 </body>
 
