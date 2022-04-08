@@ -1,3 +1,8 @@
+/**
+ * 关键点：
+ * 1.过滤非函数
+ * 2.通过 reduce 和 call 实现连续调用
+ */
 // code
 function cfCompose(...arg) {
   arg = arg.filter((v) => typeof v === "function");

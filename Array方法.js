@@ -1,4 +1,7 @@
 // Array.prototype.slice
+/**
+ * 关键点：for 循环
+ */
 console.log("---------Array.prototype.slice----------");
 Array.prototype.cfSlice = function (start = 0, end = this.length) {
   const newArr = [];

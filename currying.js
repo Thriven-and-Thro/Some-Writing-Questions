@@ -1,3 +1,9 @@
+/**
+ * 关键点：
+ * 1.返回一个柯里化后的函数
+ * 2.需要绑定 this
+ * 3.通过参数个数判断是否需要再次返回一个柯里化后的函数
+ */
 // code
 function cfCurrying(fn) {
   function currying(...arg1) {
