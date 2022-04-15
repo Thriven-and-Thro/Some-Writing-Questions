@@ -18,8 +18,11 @@
     let i = 0
 
     function scrollLoad() {
+      // 视口高度
       const clientHeight = document.documentElement.clientHeight
+      // 已滚动的高度
       const scrollTop = document.documentElement.scrollTop
+      // 页面总高度
       const scrollHeight = document.documentElement.scrollHeight
 
       if (scrollHeight - 100 <= clientHeight + scrollTop && i < imgs.length) {

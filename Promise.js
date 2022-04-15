@@ -1,3 +1,17 @@
+/**
+ * 关键点：
+ * 1.函数在 try...catch 中执行，封装为 execFunctionWithCatchError(execFn, value, resolve, reject)
+ * 2.构造函数中有 resolve、reject 函数，使用 queueMicrotask 开启微任务
+ * 3.变量：
+ *  - status：状态
+ *  - value：resolve 时的值
+ *  - reason：reject 时的值
+ *  - onFulfilledFns：同步 fulfilled 需要执行的函数
+ *  - onRejectedFns：同步 rejected 需要执行的函数
+ * 4.then 方法：返回 promise，设置默认值，分别处理同步 then 和异步 then
+ * 5.catch、finally、resolve、reject、all、allSettled、race、any
+ */
+
 const PROMISE_STATUS_PENDING = "pending";
 const PROMISE_STATUS_FULFILLED = "fulfilled";
 const PROMISE_STATUS_REJECTED = "rejected";
@@ -54,6 +68,7 @@ class CfPromise {
   }
 
   then(onFulfilled, onRejected) {
+    // 感觉此处使用 es6 的默认参数会更好一点
     onRejected =
       onRejected ||
       ((err) => {
@@ -75,6 +90,7 @@ class CfPromise {
       // then 同步调用
       if (this.status === PROMISE_STATUS_PENDING) {
         if (onFulfilled)
+          // 感觉此处应该需要一个参数 value，因为上面 resolve 中调用函数时传入一个 value
           this.onFulfilledFns.push(() => {
             execFunctionWithCatchError(
               onFulfilled,
