@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- 
+  狭义的三栏布局：要求中间最先加载
+  典型的有圣杯布局、双飞翼布局、flex布局
+ -->
+
+<style>
+  #sheng {
+    margin: 0 100px;
+    position: relative;
+  }
+
+  #sheng div {
+    height: 100px;
+    background-color: black;
+  }
+
+  #sheng .main {
+    background-color: aqua;
+  }
+
+  #sheng .left {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    margin-left: -100px;
+    background-color: aliceblue;
+  }
+
+  #sheng .right {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    margin-left: 100%;
+    background-color: aquamarine;
+  }
+</style>
+
+<style>
+  #shuang div {
+    height: 100px;
+  }
+
+  #shuang .wrap {
+    float: left;
+    width: 100%;
+    background-color: black;
+  }
+
+  #shuang .main {
+    margin: 0 100px;
+    background-color: aqua;
+  }
+
+  #shuang .left {
+    float: left;
+    width: 100px;
+    margin-left: -100%;
+    background-color: aliceblue;
+
+  }
+
+  #shuang .right {
+    float: left;
+    width: 100px;
+    margin-left: -100px;
+    background-color: aquamarine;
+  }
+</style>
+
+<body>
+  <!-- 
+    圣杯布局：最外层div可设置css的情况
+   -->
+  <div id="sheng">
+    <div class="main"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+
+  <!-- 
+    双飞翼布局：最外层div不可设置css的情况
+   -->
+  <div id="shuang">
+    <div class="wrap">
+      <div class="main"></div>
+    </div>
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+</body>
+
+</html>
